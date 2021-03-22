@@ -1,0 +1,89 @@
+<div>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block stylesheet %}
+            <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='css_form.css') }}"/>
+        {% endblock stylesheet %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='javascript.js')}}"></script>
+
+        <meta charset="UTF-8">
+        <title>Formulario Pedidos PizarraClub</title>
+    </head>
+
+    <body>
+    <div class = "container">
+      <div class="heading">
+            <p></p>
+            <p></p>
+            <h1 align="center">Llenemos los pedidos</h1>
+
+      <form action="/process" method = "POST">
+              <fieldset>
+                <h3 align="center">Acerca del cliente</h3>
+                 <p>Nombre Completo <input type = "text" name = "costumer_name" required/></p>
+                 <p>Teléfono de contacto<input type = "tel" name = "costumer_phone" placeholder="Incluye el codigo +51 al inicio" required/></p>
+              </fieldset>
+
+              <fieldset>
+                 <h3 align="center">Acerce del producto</h3>
+                    <p>
+                    <label for="product_name">Producto</label>
+                       <select id="product_name" name="product_name">
+                         {% for option in product_list %}
+                           <option value="{{option}}">{{option}}</option>
+                         {% endfor %}
+                       </select>
+                     </p>
+
+                <label for="purchase_channel">Canal de Compra</label>
+                     <select id="purchase_channel" name="purchase_channel" placeholder = "Selecciona una opción" required>
+                       {% for option in purchase_channel_list %}
+                         <option value="{{option}}">{{option}}</option>
+                       {% endfor %}
+                     </select>
+
+              </fieldset>
+
+              <fieldset>
+                    <h3 align="center">Acerca del Delivery & Pagos</h3>
+                   <p>Dirección de entrega <input type = "text" name = "delivery_address" placeholder = "Ingresa todos los detalles"/ required ></p>
+                   <p>Link de D. entrega <input type = "text" name = "link_delivery_address" placeholder = "Ingresa link de dirección"/ required ></p>
+                   <p>
+                   <label for="country_type">Distrito de Entrega</label>
+                      <select id="country_type" name="country_type" placeholder = "Selecciona una opción" required>
+                        {% for option in country_type_list %}
+                          <option value="{{option}}">{{option}}</option>
+                        {% endfor %}
+                      </select>
+                    </p>
+                    <p>
+                    <label for="delivery_status">Status Entrega</label>
+                      <select id="delivery_status" name="delivery_status" placeholder = "Selecciona una opción" required>
+                        {% for option in delivery_status_list %}
+                          <option value="{{option}}">{{option}}</option>
+                        {% endfor %}
+                      </select>
+                    </p>
+                    <p>
+                      <label for="checkout_status">Status de Pago</label>
+                         <select id="checkout_status" name="checkout_status" placeholder = "Selecciona una opción" required>
+                           {% for option in checkout_status_list %}
+                             <option value="{{option}}">{{option}}</option>
+                           {% endfor %}
+                         </select>
+                    </p>
+
+
+              </fieldset>
+
+                  <button type = "submit" class="float" id="buttom_process" >Enviar Pedido</button>
+      </form>
+
+          </div>
+        </div>
+    </body>
+
+
+</div>

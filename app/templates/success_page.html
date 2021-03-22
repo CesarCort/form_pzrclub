@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block stylesheet %}
+            <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='css_form.css') }}"/>
+        {% endblock stylesheet %}
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+        <meta charset="UTF-8">
+        <title>Pedido Registrado exitosamente!</title>
+    </head>
+<body>
+  <div class = "container">
+    <div class="heading">
+      <form action={{wsp_link}}>
+          <img src="{{ url_for('static', filename='img/Finish.gif') }}" alt="Dame esos 5" class="img_thanks">
+          <h3 align="center">{{success_msg}}<h3>
+          <a href={{wsp_link}} class="btn btn-success" align="center">Enviar msg a wspeee!</a>
+      </form>
+    </div>
+  </div>
+<body>
