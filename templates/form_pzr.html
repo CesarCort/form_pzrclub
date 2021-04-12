@@ -13,6 +13,7 @@
     </head>
 
     <body>
+    <br><br><br><br><br><br><br><br><br>
     <div class = "container">
       <div class="heading">
             <p></p>
@@ -23,11 +24,11 @@
               <fieldset>
                 <h3 align="center">Acerca del cliente</h3>
                  <p>Nombre Completo <input type = "text" name = "costumer_name" required/></p>
-                 <p>Teléfono de contacto<input type = "tel" name = "costumer_phone" placeholder="Incluye el codigo +51 al inicio" required/></p>
+                 <p>Teléfono de contacto<input type = "text" name = "costumer_phone" placeholder="Incluye el codigo +51 al inicio" required/></p>
               </fieldset>
 
               <fieldset>
-                 <h3 align="center">Acerce del producto</h3>
+                 <h3 align="center">Acerce del Producto & Compra</h3>
                     <p>
                     <label for="product_name">Producto</label>
                        <select id="product_name" name="product_name">
@@ -36,13 +37,28 @@
                          {% endfor %}
                        </select>
                      </p>
-
+                     <p>
+                     <label for="quantity_product">Cantidad</label>
+                        <select id="quantity_product" name="quantity_product">
+                          {% for option in quantity_product_list %}
+                            <option value="{{option}}">{{option}}</option>
+                          {% endfor %}
+                        </select>
+                      </p>
+                <p>
                 <label for="purchase_channel">Canal de Compra</label>
                      <select id="purchase_channel" name="purchase_channel" placeholder = "Selecciona una opción" required>
-                       {% for option in purchase_channel_list %}
-                         <option value="{{option}}">{{option}}</option>
-                       {% endfor %}
+                         {% for option in purchase_channel_list %}
+                           <option value="{{option}}">{{option}}</option>
+                         {% endfor %}
                      </select>
+                </p>
+
+                <p>
+                <label for="purchase_date">Fecha de compra</label>
+                      <input  type="date" id="purchase_date" name="purchase_date"  placeholder="dd/mm/yyyy" value="" required>
+                </p>
+
 
               </fieldset>
 
@@ -50,7 +66,23 @@
                     <h3 align="center">Acerca del Delivery & Pagos</h3>
                    <p>Dirección de entrega <input type = "text" name = "delivery_address" placeholder = "Ingresa todos los detalles"/ required ></p>
                    <p>Link de D. entrega <input type = "text" name = "link_delivery_address" placeholder = "Ingresa link de dirección"/ required ></p>
-                   <p>
+                   <p style="font-size:10px !important;color:blue;">Obten el link por google maps <a href="https://www.google.com/maps">Aquí</a></p>
+                     <label for="delivery_agent">¿Quién enviará el pedido?</label>
+                        <select id="delivery_agent" name="delivery_agent" placeholder = "Selecciona una opción" required>
+                          {% for option in delivery_agent_list %}
+                            <option value="{{option}}">{{option}}</option>
+                          {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                      <label for="delivery_type">¿Que tipo de envio es?</label>
+                         <select id="delivery_type" name="delivery_type" placeholder = "Selecciona una opción" required>
+                           {% for option in delivery_type_list %}
+                             <option value="{{option}}">{{option}}</option>
+                           {% endfor %}
+                         </select>
+                     </p>
+                    <p>
                    <label for="country_type">Distrito de Entrega</label>
                       <select id="country_type" name="country_type" placeholder = "Selecciona una opción" required>
                         {% for option in country_type_list %}
@@ -67,12 +99,14 @@
                       </select>
                     </p>
                     <p>
-                      <label for="checkout_status">Status de Pago</label>
+                      <label for="checkout_status">¿Tiene alguna Deuda?</label>
                          <select id="checkout_status" name="checkout_status" placeholder = "Selecciona una opción" required>
                            {% for option in checkout_status_list %}
                              <option value="{{option}}">{{option}}</option>
                            {% endfor %}
                          </select>
+
+
                     </p>
 
 

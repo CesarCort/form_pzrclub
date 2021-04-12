@@ -16,7 +16,13 @@
       <form action={{wsp_link}}>
           <img src="{{ url_for('static', filename='img/Finish.gif') }}" alt="Dame esos 5" class="img_thanks">
           <h3 align="center">{{success_msg}}<h3>
-          <a href={{wsp_link}} class="btn btn-success" align="center" target="_blank">Enviar msg a wspeee!</a>
+          <p align="center">
+          <a href={{wsp_link_agent}} class="btn btn-success" align="center" target="_blank">Enviar msg a AGENTE Delivery!</a><br><br>
+          </p>
+
+          <p align="center">
+          <a href={{wsp_link_customer}} class="btn btn-success" align="center" target="_blank">Enviar msg a Cliente!</a>
+          </p>
       </form>
     </div>
   </div>
