@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="user-scalable=no,maximum-scale=1.0,width=device-width, initial-scale=1.0">
+  {% block stylesheet %}
+      <!--link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='css_form.css') }}"-->
+      <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='bootstrap.min.css') }}">
+      <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='custom-style.css') }}">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  {% endblock stylesheet %}
+
+  <title>Formulario Pedidos PizarraClub</title>
+</head>
+  <body>
+    <!--Navbar-->
+        <nav class = "navbar navbar-expand-lg navbar-light bg-light">
+          <a class= "navbar-brand" href="./index.html">Envia Facil</a>
+          <!--button responsive menu-->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!---->
+          <div class="collapse navbar-collapse " id="navbarTogglerDemo011">
+
+              <ul class="nav navbar-nav ml-auto">
+
+                <li class="nav-item">
+                  <a class="nav-link" href="register.html">
+                    <i class="fas fa-user-plus"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html">
+                    <i class="fas fa-sign-in-alt"></i> Cerrar sesión</a>
+                </li>
+              </ul>
+            </div>
+
+        </nav>
+    <!--End Navbar-->
+
+    <div class="container">
+
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb col-6 col-sm-6 col-md-3 col-lg-3" style="margin-top:20px;">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Nueva Orden</li>
+        </ol>
+      </nav>
+      <!--Title Section-->
+      <section class="titlesection row mt-2">
+        <h3>Ingresar Orden</h3>
+
+      </section>
+
+
+
+      <!--Section Form + Advertise-->
+      <div class="row">
+
+      <!--Section Form-->
+      <div class="form col col-md-9 col-sm-12 col-lg-9">
+        <form class="needs-validation" action="/process" method = "POST" novalidate>
+          <div class="form-row">
+            <!--Title Section Form-->
+            <div class="col-12 mt-4">
+              <h4 class="title-section">Acerca de tu Cliente</h4>
+            </div>
+            <!-- END Title Section Form-->
+            <div class="col-md-6 mb-3">
+              <label for="validationTooltip01">Nombre Completo de Receptor</label>
+              <input type="text" class="form-control" id="validationTooltip01" name="costumer_name" value="" required>
+              <div class="valid-tooltip">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationTooltip02"># Whataspp/Contacto</label>
+              <input type="text" class="form-control" id="validationTooltip02" name="costumer_phone" value="" required>
+              <div class="valid-tooltip">
+                Looks good!
+              </div>
+            </div>
+          </div>
+      <div class="form-row">
+
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip03">Dirección Destino Completa</label>
+          <input type="text" class="form-control" id="validationTooltip03" name="delivery_address" required>
+          <div class="invalid-tooltip">
+            Please provide a address.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="country_type">Distrito</label>
+          <select class="custom-select" id="country_type" name="country_type" required>
+            <option selected disabled value="">Elegir...</option>
+            {% for option in country_type_list %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          </select>
+          <div class="invalid-tooltip">
+            Please select a valid state.
+          </div>
+        </div>
+      </div>
+
+      <!--Link Address-->
+      <div class="form-row">
+
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip05">Link dirección</label>
+          <input type="text" class="form-control" id="validationTooltip05" name="link_delivery_address" placeholder = "Ingresa link de dirección" required>
+          <small id="llinkhelp" class="text-muted">
+            Obtén el link de la dirección<a href="http://maps.google.com/" target="_blank"> aquí.</a></small>
+          <div class="invalid-tooltip">
+            Please provide a link.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="purchase_date">Fecha de compra</label>
+          <input  type="date"  class="form-control" id="purchase_date" name="purchase_date"  placeholder="dd/mm/yyyy" value="" required>
+        </div>
+
+      </div>
+
+      <!--PRODUCT section-->
+      <div class="form-row">
+        <!--Title Section Form-->
+        <div class="col-12 mt-4">
+          <h4 class="title-section">Acerca del producto</h4>
+        </div>
+        <!-- END Title Section Form-->
+        <div class="col-md-6 mb-3">
+          <label for="product_name">Que producto a enviar</label>
+          <select class="custom-select" id="product_name" name="product_name" required>
+            <option selected disabled value="">Elegir...</option>
+            {% for option in product_list %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          </select>
+          <small id="productohelp" class="text-muted">
+            Ingresa tus productos<a href="#"> aquí.</a></small>
+          <div class="invalid-tooltip">
+            Please select a valid state.
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label for="quantity_product">Cantidad</label>
+          <select  class="custom-select" id="quantity_product" name="quantity_product">
+            {% for option in quantity_product_list %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          </select>
+
+          <div class="invalid-tooltip">
+            Please select a Quantity.
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label for="purchase_channel">Canal de Compra</label>
+           <select id="purchase_channel" class="custom-select" name="purchase_channel" placeholder = "Selecciona una opción" required>
+               {% for option in purchase_channel_list %}
+                 <option value="{{option}}">{{option}}</option>
+               {% endfor %}
+           </select>
+
+          <div class="invalid-tooltip">
+            Please select a Quantity.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+        <!--Title Section Form-->
+        <div class="col-12 mt-4">
+          <h4 class="title-section">Acerca del Servicio</h4>
+        </div>
+        <!-- END Title Section Form-->
+        <div class="col-md-6 mb-3">
+          <label for="delivery_type">Tipo de envio</label>
+          <select class="custom-select" id="delivery_type" name="delivery_type" required>
+            <option selected disabled value="">Elegir...</option>
+            {% for option in delivery_type_list %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          </select>
+
+          <small id="passwordHelpInline" class="text-muted">
+            Elige según tu necesidad.<a href="#"> Saber más.</a></small>
+          <div class="invalid-tooltip">
+            Please select a valid state.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="delivery_agen">Agente Asignado</label>
+          <select class="custom-select" id="delivery_agent" name="delivery_agent" required>
+            <option selected disabled value="">Elegir...</option>
+            {% for option in delivery_agent_list %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          </select>
+
+          <small id="passwordHelpInline" class="text-muted">
+            Configura tus puntos de partida <a href="#">aquí.</a></small>
+          <div class="invalid-tooltip">
+          <div class="invalid-tooltip">
+            Please select a valid state.
+          </div>
+        </div>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+        <!-- END Title Section Form-->
+        <div class="col-md-6 mb-3">
+          <label for="delivery_status">Status de Entrega</label>
+          <select id="delivery_status" class="custom-select" name="delivery_status" placeholder = "Selecciona una opción" required>
+            {% for option in delivery_status_list %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          </select>
+          <div class="invalid-tooltip">
+            Please select a valid state.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="checkout_status">Indicación para cobro en persona</label>
+          <select id="checkout_status" class="custom-select" name="checkout_status" placeholder = "Selecciona una opción" required>
+            {% for option in checkout_status_list %}
+              <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+          </select>
+            <div class="invalid-tooltip">
+              Please select a valid state.
+            </div>
+          </div>
+        </div>
+
+
+
+      <!--Button Send-->
+      <button type="submit" class="btn btn-primary mt-3 mb-5" >Enviar pedido</button>
+    </form>
+    </div>
+    </div>
+    <!-- END Section Form-->
+
+    <!--Section Advertise-->
+      <section class="container-fluid px-0 py-0 advertise col-3 col-sm-12 col-md-3 col-lg-3 mt-3 mb-5 no-gutters">
+          <!--
+          <p class="mt-2">Nuevas Oportunidades para seguir creciendo</p>
+          -->
+          <img  src="./Ucopy.jpg" class="img-advertise no-gutters img-responsive " >
+      </section>
+    <!-- END Section Advertise-->
+
+    <!-- END Section Form + Advertise-->
+
+
+
+    </div>
+
+    <!--Script-->
+    <script src="{{ url_for('static', filename='bootstrap.min.js')}}" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='jquery.js')}}" charset="utf-8"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+  </body>
+</html>
