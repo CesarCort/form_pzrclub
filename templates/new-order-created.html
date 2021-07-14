@@ -111,8 +111,8 @@
         <div class="col-md-6 mb-3">
           <label for="validationTooltip05">Link dirección</label>
           <input type="text" class="form-control" id="validationTooltip05" name="link_delivery_address" placeholder = "Ingresa link de dirección" required>
-          <small id="llinkhelp" class="text-muted">
-            Obtén el link de la dirección<a href="http://maps.google.com/" target="_blank"> aquí.</a></small>
+          <small id="linkhelp_" class="text-muted">
+            Obtén el link de la dirección<a id="linkhelp" href="#" target="_blank" onclick="goToPage();"> aquí.</a></small>
           <div class="invalid-tooltip">
             Please provide a link.
           </div>
@@ -274,6 +274,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function goToPage(){
+          var addres_to_send = $('input[name=delivery_address]').val();
+          document.getElementById("linkhelp").href = "http://maps.google.com/?q="+addres_to_send;
 
+          //window.location.href = "http://maps.google.com/?q="+addres_to_send;
+      }
+      element.setAttribute('onclick', 'window.location.href=\'http://address.com\'');
+      </script>
   </body>
 </html>
