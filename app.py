@@ -16,11 +16,21 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import os
+from datetime import datetime
 # from utils import utils_data_wrangling
 
 def list_option(df,column):
     options = df[column][df[column]!=""].to_list()
     return options
+
+def datetime_format(date):
+    date = str(date)
+    if len(date)==1:
+        date = "0"+date
+        
+    return date
+
+
 
 app = Flask(__name__)
 
@@ -112,8 +122,14 @@ def form():
         delivery_agent = data["delivery_agent"] # new
 
         checkout_status = data["checkout_status"]
+        
+        # TimeStamp
+        timestamp = datetime.today()
+        y = datetime_format(str(timestamp.year))
+        m = datetime_format(str(timestamp.month))
+        d =datetime_format(str(timestamp.day)) 
+        date_created = "{}-{}-{}".format(y,m,d)
         print(checkout_status)
-        print("hola")
         # MYSQL INSERT
         # cursor = mysql.connection.cursor()
         # cursor.execute('SELECT * FROM account WHERE username = %s AND password = %s', (username, password,))
@@ -139,10 +155,14 @@ def form():
             # msg = "Registro exitoso"
 
             # Set the webhook_url to the one provided by Slack when you create the webhook at https://my.slack.com/services/new/incoming-webhook/
-        webhook_url = 'https://hook.integromat.com/t4rg4pccv3mg53w7qr4xudlrmbtlu31o'
+        webhook_url = 'https://hook.integromat.com/fp9i58e7if5yq7r5gfa65x5lb8wp2jeh'
         #slack_data = {'text': "Sup! We're hacking shit together @HackSussex :spaghetti:"}
 
         json_data_form = json.dumps(data)
+        json_data_ = json.loads(json_data_form)
+        json_data_["timestamp"] = date_created
+        json_data_form = json.dumps(json_data_)
+        
         print(json_data_form)
         response = requests.post(
             webhook_url, data=json_data_form,
@@ -164,7 +184,7 @@ def form():
                                 delivery_address,link_delivery_address,delivery_type,delivery_agent)
         text_customer =   """%2A===================%2A%0D%0A{}%0D%0A%2ACliente%2A : {}%0D%0A%2AProducto%2A : {}%0D%0A%2ACanal de compra%2A : {}%0D%0A%2ADirección de envío%2A : {}%0D%0A%2ALink de dirección%2A : {}%0D%0A%2ATIPO DE ENVIO%2A : {}%0D%0A""".format(msg_costumer,customer_name,product_name,purchase_channel,
                                 delivery_address,link_delivery_address,delivery_type)
-
+        
 
         text_agent = text_agent.replace(" ","%20")
         text_customer = text_customer.replace(" ","%20")
